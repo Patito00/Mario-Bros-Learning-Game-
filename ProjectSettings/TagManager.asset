@@ -12,6 +12,8 @@ TagManager:
   - Mario Fireball
   - Enemy/Bowser
   - Blocks
+  - Lucky Blocks
+  - Enemies
   layers:
   - Default
   - TransparentFX

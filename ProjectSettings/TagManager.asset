@@ -7,13 +7,8 @@ TagManager:
   - Enemy
   - Platform
   - Goal
-  - Coin
-  - Enemy/Piranha
-  - Mario Fireball
-  - Enemy/Bowser
   - Blocks
   - Lucky Blocks
-  - Enemies
   layers:
   - Default
   - TransparentFX
@@ -24,27 +19,27 @@ TagManager:
   - 
   - 
   - Mario
-  - Ground
-  - Mario Stomp Box
   - Block
-  - Kill Plane
-  - Falling to Kill Plane
-  - Powerup
-  - Effect
+  - Coin
   - Enemy
-  - Mario After Powerdown
-  - Mario After Starman
   - Goal
-  - Collectible
-  - Player Detector
-  - Non-Player Detector
-  - Mario Fireball
-  - Patrolling Enemy Detector
-  - Patrolling Enemy
-  - Collectible Detector
-  - Moving Platform
-  - Movable Object Detector
-  - Bodiless Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   m_SortingLayers:

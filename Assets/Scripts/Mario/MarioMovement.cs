@@ -7,29 +7,33 @@ public class MarioMovement : MonoBehaviour
     public float runVelocity;
     public float jumpForce;
     Rigidbody2D rigidbody;
-    CheckGround checkGround;
-    MarioAnimationManager marioAnimationManager;
+    //CheckGround checkGround;
+    MarioStateManager marioStateManager;
 
     // Start is called before the first frame update
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
-        checkGround = GetComponent<CheckGround>();
-        marioAnimationManager = GetComponent<MarioAnimationManager>();
+        //checkGround = GetComponent<CheckGround>();
+        marioStateManager = GetComponent<MarioStateManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // horizontal moving
-        float horizontalMove = Input.GetAxis("Horizontal");
-        Vector2 move = new Vector2(horizontalMove, 0f);
-        transform.Translate(move * runVelocity * Time.deltaTime);
-        marioAnimationManager.RunAnim(horizontalMove); // setting running animation
+        // while Mario is alived, the player can play 
+        if(!MarioStateManager.marioIsDead)
+        {
+            // horizontal moving
+            float horizontalMove = Input.GetAxis("Horizontal");
+            Vector2 move = new Vector2(horizontalMove, 0f);
+            transform.Translate(move * runVelocity * Time.deltaTime);
+            marioStateManager.RunAnim(horizontalMove); // setting running animation
 
-        // jumping
-        if (Input.GetKeyDown(KeyCode.Space) && checkGround.isInGround){
-            rigidbody.AddForce(new Vector2(0, jumpForce));
-        }
-        marioAnimationManager.JumpAnim(checkGround.isInGround); // setting jump animation
+            // jumping
+            if (Input.GetKeyDown(KeyCode.Space) && CheckGround.isInGround){
+                rigidbody.AddForce(new Vector2(0, jumpForce));
+            }
+            marioStateManager.JumpAnim(CheckGround.isInGround); // setting jump animation
+        }  
     }
 }

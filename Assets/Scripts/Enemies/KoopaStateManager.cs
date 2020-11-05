@@ -33,19 +33,24 @@ public class KoopaStateManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         
-        // stop or start moving if collides with player
-        if(other.gameObject.CompareTag("Player"))
+        if(isKoopaDead)
         {
-            isKoopaFreeze = !isKoopaFreeze;
-            enemyMovement.enabled = isKoopaFreeze;
-        }
-        // if collides with enemy, kill it and give points
-        else if(isKoopaDead && other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.GetComponent<Animator>().SetBool("Dead", true);
-            GameController.Instance.IncreasePoints(100);
-            // this is for the koopa can continue moving in the same direction
-            enemyMovement.speed = -enemyMovement.speed;  
+            switch(other.gameObject.tag)
+            {
+                // if collides with the player
+                case "Player":
+                    enemyMovement.enabled = isKoopaFreeze;
+                    isKoopaFreeze = !isKoopaFreeze;
+                    break;
+
+                // or with an enemy
+                case "Enemy":
+                    other.gameObject.GetComponent<Animator>().SetBool("Dead", true);
+                    GameController.Instance.IncreasePoints(100);
+                    // this is for the koopa can continue moving in the same direction
+                    enemyMovement.speed = -enemyMovement.speed;   
+                    break;
+            }
         }
     }
 }

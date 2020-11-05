@@ -8,10 +8,12 @@ TagManager:
   - Platform
   - Goal
   - Blocks
-  - Lucky Blocks
   - Trap
   - Floor
   - Coin
+  - Question Blocks
+  - Mushrooms
+  - Stars
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - 
   - Mario
   - Block
-  - Coin
+  - Pick items
   - Enemy
   - Goal
   - Mario

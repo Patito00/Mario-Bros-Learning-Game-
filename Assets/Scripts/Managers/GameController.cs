@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetInt("Record", points);
         }
+        Debug.Log("Points: " + points);
     }
 
     public IEnumerator ChangingScene(float secondsWait)

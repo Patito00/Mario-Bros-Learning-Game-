@@ -5,9 +5,13 @@ using UnityEngine;
 public class MarioStateManager : MonoBehaviour
 {   
     GameController gameController;
-    public static bool marioIsDead;// { get; private set; }
+    public static bool marioIsDead;
     public float killJumpForce;
     public float deadJumpForce;
+    public float extraDeadJumpForce;
+    public bool isTransformingSize { get; private set; }
+    public int marioExtraLives { get; private set; }  
+    private bool invincibility;
     Rigidbody2D rigidbody2D;
     BoxCollider2D boxCollider2D;
     SpriteRenderer spriteRenderer;
@@ -24,10 +28,11 @@ public class MarioStateManager : MonoBehaviour
     }
     private void Start() {
         marioIsDead = false;
+        marioExtraLives = 0;
     }
 
     // setting running animation
-    public void RunAnim(float p_horizontalMove)
+    public void RunningMario(float p_horizontalMove)
     {
         animator.SetBool("Running", (p_horizontalMove != 0f)); // changing anim
         if(p_horizontalMove < 0){
@@ -37,27 +42,87 @@ public class MarioStateManager : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
+    
     // setting jumping animation
-    public void JumpAnim(bool p_isInGround){
+    public void JumpingMario(bool p_isInGround){
         animator.SetBool("IsInGround", p_isInGround);
     }
+
     // setting dead animation
-    public void DeadAnim(){
+    public void DeadMario(bool extraForce){
+   
+        if(!marioIsDead && !invincibility)
+        {
+            animator.SetBool("Dead", true);
+            
+            // setting variables
+            deadJumpForce += extraForce ? extraDeadJumpForce : 0; 
+            rigidbody2D.AddForce(Vector2.up * deadJumpForce);
+            boxCollider2D.enabled = false;  
 
-        // setting variables
-        animator.SetBool("Dead", true);
-        rigidbody2D.AddForce(Vector2.up * deadJumpForce);
-        boxCollider2D.enabled = false;  
-
-        // playing the dead sound and changing scene
-        marioIsDead = true;
-        gameController.lives--;
-        StartCoroutine(gameController.ChangingScene(soundManager.LoseALiveSound()));
+            // playing the dead sound and changing scene
+            marioIsDead = true;
+            gameController.lives--;
+            StartCoroutine(gameController.ChangingScene(soundManager.LoseALiveSound()));
+        }
     }   
-
     // setting killing JumpAnimation
     public void KillEnemyAnim()
     {
         rigidbody2D.AddForce(Vector2.up * killJumpForce);
+    }
+
+    // setting bigger, or litler, Mario state
+    public void SmallToBigMario()
+    {
+        if(marioExtraLives < 1)
+        {
+            animator.SetTrigger("Transform size");
+            marioExtraLives = 1;
+        }
+        else
+            gameController.IncreasePoints(100);
+
+        SetCurrentLayer(marioExtraLives);
+    }
+    public void BigToSmallMario()
+    {
+        animator.SetTrigger("Transform size");
+        marioExtraLives = 0;
+        // invincibility = true;
+        SetCurrentLayer(marioExtraLives);
+    }
+
+    // invecibility state method 
+    public void GhostState()
+    {
+        Debug.Log("Invoke Ghost State");
+        StartCoroutine(GhostAnim(5, .33f));
+    }
+    // not working //
+
+
+    // private methods and corutines
+    private void SetCurrentLayer(int p_index)
+    {
+        for(int i = 0; i < animator.layerCount; i++)
+        {
+            string layer_name = animator.GetLayerName(i);
+
+            if(i == p_index)
+                animator.SetLayerWeight(p_index, 1);
+            else
+                animator.SetLayerWeight(i, 0);
+        }
+    }
+    private IEnumerator GhostAnim(int repeat, float waitTime)
+    {   
+        for(int i = 0; i < repeat; i++)
+        {
+            Debug.Log("Mario " + ( (i % 2 == 0) ? "Appear" : "Disappear") );
+            yield return new WaitForSeconds(waitTime);
+        }
+        invincibility = false;
+        SetCurrentLayer(0);
     }
 }

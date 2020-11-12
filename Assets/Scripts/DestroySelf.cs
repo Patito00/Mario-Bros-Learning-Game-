@@ -8,4 +8,9 @@ public class DestroySelf : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void DestroyParent()
+    {
+        transform.parent.GetComponent<DestroySelf>().DestroyObject();
+    }
 }

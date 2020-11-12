@@ -18,8 +18,7 @@ public class GameOverManager : MonoBehaviour
     }
     public void PlayAgain()
     {
-        gameController.lives = 3;
-        gameController.points = 0;
+        gameController.Restart();
         SceneManager.LoadScene("Level 1"); 
     }
 }

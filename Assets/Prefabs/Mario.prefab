@@ -14,12 +14,11 @@ GameObject:
   - component: {fileID: 3850534186805506023}
   - component: {fileID: 3850534186805506020}
   - component: {fileID: 3850534186805506022}
-  - component: {fileID: 3850534186805506021}
   - component: {fileID: 3850534186805506019}
+  - component: {fileID: 3969808915491671011}
   - component: {fileID: 3850534186805506016}
   - component: {fileID: 3850534186805506018}
   - component: {fileID: 3850534186805506031}
-  - component: {fileID: 3850534186805506030}
   - component: {fileID: 3850534186805506017}
   m_Layer: 8
   m_Name: Mario
@@ -78,9 +77,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1169635243
+  m_SortingLayer: 10
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300012, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -105,7 +104,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0040798187, y: -0.002233386}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -116,7 +115,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8125, y: 1}
+  m_Size: {x: 0.8343073, y: 1.05901}
   m_EdgeRadius: 0
 --- !u!50 &3850534186805506023
 Rigidbody2D:
@@ -170,20 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f95048af26f4c478aab4483781b90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runVelocity: 5
+  runVelocity: 6
   jumpForce: 250
---- !u!114 &3850534186805506021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3850534186805506043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0df744587080dc3419f81d7f297f4ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  deadPoint: -5
 --- !u!114 &3850534186805506019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +184,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b571914c7ec148947217913f3a745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killJumpForce: 250
+  killJumpForce: 333
   deadJumpForce: 500
+--- !u!114 &3969808915491671011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850534186805506043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df744587080dc3419f81d7f297f4ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3850534186805506016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,18 +234,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f3dbadadabf9c343b4db426659afcaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3850534186805506030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3850534186805506043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d47cfadbd98ee4d42b6f80456678b082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &3850534186805506017

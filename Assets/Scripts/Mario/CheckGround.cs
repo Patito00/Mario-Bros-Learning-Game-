@@ -9,7 +9,7 @@ public class CheckGround : MonoBehaviour
 
     // if the player is in the ground
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor")){// || other.gameObject.CompareTag("Floor")){
+        if(other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor")){
             isInGround = true;
         }    
     }

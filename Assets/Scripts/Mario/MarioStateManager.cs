@@ -8,8 +8,6 @@ public class MarioStateManager : MonoBehaviour
     public static bool marioIsDead;
     public float killJumpForce;
     public float deadJumpForce;
-    public float extraDeadJumpForce;
-    public bool isTransformingSize { get; private set; }
     public int marioExtraLives { get; private set; }  
     private bool invincibility;
     Rigidbody2D rigidbody2D;
@@ -53,10 +51,9 @@ public class MarioStateManager : MonoBehaviour
    
         if(!marioIsDead && !invincibility)
         {
-            animator.SetBool("Dead", true);
             
             // setting variables
-            deadJumpForce += extraForce ? extraDeadJumpForce : 0; 
+            animator.SetBool("Dead", true);
             rigidbody2D.AddForce(Vector2.up * deadJumpForce);
             boxCollider2D.enabled = false;  
 
@@ -72,57 +69,54 @@ public class MarioStateManager : MonoBehaviour
         rigidbody2D.AddForce(Vector2.up * killJumpForce);
     }
 
-    // setting bigger, or litler, Mario state
-    public void SmallToBigMario()
+    // setting bigger, or littler, Mario state
+    public void ShrinkMario()
     {
-        if(marioExtraLives < 1)
+        SetMarioExtraLive(0);
+    }
+    public void EnlargeMario()
+    {
+        if(marioExtraLives == 1)
         {
-            animator.SetTrigger("Transform size");
-            marioExtraLives = 1;
+            gameController.IncreasePoints(100);
         }
         else
-            gameController.IncreasePoints(100);
-
-        SetCurrentLayer(marioExtraLives);
+        {
+            SetMarioExtraLive(1);
+        }
     }
-    public void BigToSmallMario()
-    {
-        animator.SetTrigger("Transform size");
-        marioExtraLives = 0;
-        // invincibility = true;
-        SetCurrentLayer(marioExtraLives);
-    }
-
-    // invecibility state method 
-    public void GhostState()
-    {
-        Debug.Log("Invoke Ghost State");
-        StartCoroutine(GhostAnim(5, .33f));
-    }
-    // not working //
-
-
+    
     // private methods and corutines
-    private void SetCurrentLayer(int p_index)
+    private void SetMarioExtraLive(int p_extraLives)
     {
+        marioExtraLives = p_extraLives;
+        animator.SetTrigger("Transform size");
+        StartCoroutine(SetCurrentLayer(marioExtraLives));
+    }
+    IEnumerator SetCurrentLayer(int layerIndex)
+    {
+        // both animations delays 1 second 
+        invincibility = (layerIndex == 0);
+        yield return new WaitForSeconds(1f);
+
+        // setting the correspond size layer
         for(int i = 0; i < animator.layerCount; i++)
         {
-            string layer_name = animator.GetLayerName(i);
-
-            if(i == p_index)
-                animator.SetLayerWeight(p_index, 1);
+            if(i == layerIndex)
+                animator.SetLayerWeight(layerIndex, 1);
             else
                 animator.SetLayerWeight(i, 0);
         }
-    }
-    private IEnumerator GhostAnim(int repeat, float waitTime)
-    {   
-        for(int i = 0; i < repeat; i++)
+
+        // checking ghost State
+        if (invincibility)
         {
-            Debug.Log("Mario " + ( (i % 2 == 0) ? "Appear" : "Disappear") );
-            yield return new WaitForSeconds(waitTime);
+            for (int i = 0; i < 6; i++)
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                yield return new WaitForSeconds(.3f);
+            }
+            invincibility = false;
         }
-        invincibility = false;
-        SetCurrentLayer(0);
     }
 }

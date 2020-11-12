@@ -14,16 +14,22 @@ public class EnemyCollision : MonoBehaviour
 
     // checking if Mario collides with an enemy
     private void OnCollisionEnter2D(Collision2D other) {
+        CollideWithEnemy(other.gameObject);        
+    }
+    /*private void OnCollisionStay2D(Collision2D other) {
+        CollideWithEnemy(other.gameObject);
+    }*/
 
-        bool isNotKillable = other.gameObject.CompareTag("Trap"); 
+    private void CollideWithEnemy(GameObject enemy)
+    {
+        bool isNotKillable = enemy.CompareTag("Trap"); 
 
-        if(other.gameObject.CompareTag("Enemy") || isNotKillable)
+        if(enemy.CompareTag("Enemy") || isNotKillable)
         {
-
             // if Mario can kill the enemy
             if(!CheckGround.isInGround && !isNotKillable)   
             {
-                other.gameObject.GetComponent<Animator>().SetBool("Dead", true);
+                enemy.GetComponent<Animator>().SetBool("Dead", true);
                 gameController.IncreasePoints(100);
                 stateManager.KillEnemyAnim();
             }
@@ -32,11 +38,11 @@ public class EnemyCollision : MonoBehaviour
             else
             {
                 if(stateManager.marioExtraLives > 0)
-                    stateManager.BigToSmallMario();
+                    stateManager.ShrinkMario();
                     
                 else
                     stateManager.DeadMario(false); 
             }
-        }
+        } 
     }
 }

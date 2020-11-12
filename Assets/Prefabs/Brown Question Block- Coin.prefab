@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2032501524}
   - component: {fileID: 2032501525}
+  - component: {fileID: 616552048}
   m_Layer: 9
   m_Name: Unlock Collider
   m_TagString: Question Blocks
@@ -41,7 +42,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.45}
@@ -55,8 +56,23 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24, y: 0.09}
+  m_Size: {x: 0.479065, y: 0.09000003}
   m_EdgeRadius: 0
+--- !u!114 &616552048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032501523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516b3d650e0648343801e7c1187766f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnGameObjects:
+  - {fileID: 6710619194182299700, guid: 87d7f02faf6096141ba7d0437c91b0a7, type: 3}
+  - {fileID: 855806956688789852, guid: 4067d1a17ea450247a52c912509bd394, type: 3}
 --- !u!1 &7768227662582841296
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +87,7 @@ GameObject:
   - component: {fileID: 7768227662582841301}
   m_Layer: 9
   m_Name: Surface
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

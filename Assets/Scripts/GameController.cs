@@ -11,24 +11,30 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get { return lazy.Value; } }
     [NonSerialized] public int points;
     [NonSerialized] public int lives;
-    [NonSerialized] public bool marioIsDead;
     private string currentScene;
     private string savedLevelScene;
 
     private GameController() {
+        Restart();
+    }
+
+    // methods
+    public void Restart()
+    {
         points = 0;
         lives = 3;
     }
     public void IncreasePoints(int pointsToIncrease)
-    {
+    {   
         points += pointsToIncrease;
+        Debug.Log(points);
         if(points > PlayerPrefs.GetInt("Record"))
         {
             PlayerPrefs.SetInt("Record", points);
         }
-        Debug.Log("Points: " + points);
     }
 
+    // corotuines
     public IEnumerator ChangingScene(float secondsWait)
     {
         yield return new WaitForSeconds(secondsWait); // waiting seconds to change scene

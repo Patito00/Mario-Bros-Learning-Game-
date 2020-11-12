@@ -18,12 +18,12 @@ public class PickItemCollision : MonoBehaviour
         switch(other.tag)
         {
             case "Coin":
-                other.GetComponent<Animator>().SetBool("Picked Coin", true);
+                other.GetComponent<Animator>().SetTrigger("Picked Coin");
                 gameController.IncreasePoints(100);
                 break;
 
             case "Mushrooms":
-                marioStateManager.SmallToBigMario();
+                marioStateManager.EnlargeMario();
                 Destroy(other.gameObject);
                 break;
 
@@ -32,4 +32,23 @@ public class PickItemCollision : MonoBehaviour
                 break;
         } 
     }
+    
+    // private void OnCollisionEnter2D(Collision2D other) {
+    //     switch(other.gameObject.tag)
+    //     {
+    //         case "Coin":
+    //             other.gameObject.GetComponent<Animator>().SetTrigger("Picked Coin");
+    //             gameController.IncreasePoints(100);
+    //             break;
+
+    //         case "Mushrooms":
+    //             marioStateManager.EnlargeMario();
+    //             Destroy(other.gameObject);
+    //             break;
+
+    //         case "Stars":
+    //             Debug.Log("Stars");
+    //             break;
+    //     }
+    // }
 }

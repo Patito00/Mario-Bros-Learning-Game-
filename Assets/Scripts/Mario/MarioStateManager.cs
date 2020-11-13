@@ -8,6 +8,7 @@ public class MarioStateManager : MonoBehaviour
     public static bool marioIsDead;
     public float killJumpForce;
     public float deadJumpForce;
+    public float starPowerTime;
     public int marioExtraLives { get; private set; }  
     private bool invincibility;
     Rigidbody2D rigidbody2D;
@@ -69,7 +70,7 @@ public class MarioStateManager : MonoBehaviour
         rigidbody2D.AddForce(Vector2.up * killJumpForce);
     }
 
-    // setting bigger, or littler, Mario state
+    // Mario states methods
     public void ShrinkMario()
     {
         SetMarioExtraLive(0);
@@ -85,28 +86,34 @@ public class MarioStateManager : MonoBehaviour
             SetMarioExtraLive(1);
         }
     }
-    
-    // private methods and corutines
+    public IEnumerator StarMario()
+    {
+        Debug.Log("StarMario");
+
+        invincibility = true;
+        animator.SetBool("Star", true);
+        yield return new WaitForSeconds(starPowerTime);
+        
+        invincibility = false;
+        animator.SetBool("Star", false);
+    }
+
+    // private methods and private corutines
     private void SetMarioExtraLive(int p_extraLives)
     {
         marioExtraLives = p_extraLives;
         animator.SetTrigger("Transform size");
-        StartCoroutine(SetCurrentLayer(marioExtraLives));
+        StartCoroutine(SetMarioState());
     }
-    IEnumerator SetCurrentLayer(int layerIndex)
+    IEnumerator SetMarioState()
     {
         // both animations delays 1 second 
-        invincibility = (layerIndex == 0);
         yield return new WaitForSeconds(1f);
 
         // setting the correspond size layer
-        for(int i = 0; i < animator.layerCount; i++)
-        {
-            if(i == layerIndex)
-                animator.SetLayerWeight(layerIndex, 1);
-            else
-                animator.SetLayerWeight(i, 0);
-        }
+        invincibility = marioExtraLives == 0;
+        animator.SetLayerWeight(marioExtraLives, 1); 
+        animator.SetLayerWeight( invincibility ? 1 : 0, 0);
 
         // checking ghost State
         if (invincibility)

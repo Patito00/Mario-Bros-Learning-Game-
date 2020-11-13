@@ -7,22 +7,17 @@ public class CheckGround : MonoBehaviour
 {
     public static bool isInGround; 
 
+
     // if the player is in the ground
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor")){
-            isInGround = true;
-        }    
+        isInGround = other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor");
     }
     private void OnCollisionStay2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor")){
-            isInGround = true;
-        } 
+        isInGround = other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor");
     }
 
     // if the player isn't
     private void OnCollisionExit2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor")){
-            isInGround = false;
-        }    
+        isInGround = !( other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Floor") );    
     }
 }

@@ -16,11 +16,11 @@ public class EnemyCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         CollideWithEnemy(other.gameObject);        
     }
-    /*private void OnCollisionStay2D(Collision2D other) {
+    private void OnCollisionStay2D(Collision2D other) {
         CollideWithEnemy(other.gameObject);
-    }*/
+    }
 
-    private void CollideWithEnemy(GameObject enemy)
+    private void CollideWithEnemy(GameObject enemy) //, int pointsToIncrease)
     {
         bool isNotKillable = enemy.CompareTag("Trap"); 
 

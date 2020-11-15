@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3850534186805506016}
   - component: {fileID: 3850534186805506018}
   - component: {fileID: 3850534186805506031}
+  - component: {fileID: 7408667221707391038}
   - component: {fileID: 3850534186805506017}
   m_Layer: 8
   m_Name: Mario
@@ -186,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killJumpForce: 333
   deadJumpForce: 500
+  starPowerTime: 5
 --- !u!114 &3969808915491671011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +236,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f3dbadadabf9c343b4db426659afcaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7408667221707391038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850534186805506043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8c65816934c6b4db3b9b66268cca7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &3850534186805506017

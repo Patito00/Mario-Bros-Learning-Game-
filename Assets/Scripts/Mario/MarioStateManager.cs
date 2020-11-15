@@ -10,7 +10,8 @@ public class MarioStateManager : MonoBehaviour
     public float deadJumpForce;
     public float starPowerTime;
     public int marioExtraLives { get; private set; }  
-    private bool invincibility;
+    private bool ghostMario;
+    private bool starMario;
     Rigidbody2D rigidbody2D;
     BoxCollider2D boxCollider2D;
     SpriteRenderer spriteRenderer;
@@ -48,11 +49,14 @@ public class MarioStateManager : MonoBehaviour
     }
 
     // setting dead animation
-    public void DeadMario(bool extraForce){
+    public void DeadMario(bool deadByAltitude){
    
-        if(!marioIsDead && !invincibility)
+        if(marioExtraLives > 0)
         {
-            
+            ShrinkMario();
+        }
+        else if(!marioIsDead && ( !(ghostMario || starMario) || deadByAltitude ))
+        {
             // setting variables
             animator.SetBool("Dead", true);
             rigidbody2D.AddForce(Vector2.up * deadJumpForce);
@@ -65,9 +69,16 @@ public class MarioStateManager : MonoBehaviour
         }
     }   
     // setting killing JumpAnimation
-    public void KillEnemyAnim()
+    public void KillEnemyAnim(GameObject enemy)
     {
-        rigidbody2D.AddForce(Vector2.up * killJumpForce);
+        if(starMario)
+        {
+            Destroy(enemy);
+        }
+        else
+        {
+            rigidbody2D.AddForce(Vector2.up * killJumpForce);
+        }
     }
 
     // Mario states methods
@@ -88,22 +99,23 @@ public class MarioStateManager : MonoBehaviour
     }
     public IEnumerator StarMario()
     {
-        Debug.Log("StarMario");
-
-        invincibility = true;
+        starMario = true;
         animator.SetBool("Star", true);
         yield return new WaitForSeconds(starPowerTime);
         
-        invincibility = false;
+        starMario = false;
         animator.SetBool("Star", false);
     }
 
     // private methods and private corutines
     private void SetMarioExtraLive(int p_extraLives)
     {
-        marioExtraLives = p_extraLives;
-        animator.SetTrigger("Transform size");
-        StartCoroutine(SetMarioState());
+        if(!starMario)
+        {
+            marioExtraLives = p_extraLives;
+            animator.SetTrigger("Transform size");
+            StartCoroutine(SetMarioState());
+        }
     }
     IEnumerator SetMarioState()
     {
@@ -111,19 +123,19 @@ public class MarioStateManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // setting the correspond size layer
-        invincibility = marioExtraLives == 0;
+        ghostMario = marioExtraLives == 0;
         animator.SetLayerWeight(marioExtraLives, 1); 
-        animator.SetLayerWeight( invincibility ? 1 : 0, 0);
+        animator.SetLayerWeight( ghostMario ? 1 : 0, 0);
 
         // checking ghost State
-        if (invincibility)
+        if (ghostMario)
         {
             for (int i = 0; i < 6; i++)
             {
                 spriteRenderer.enabled = !spriteRenderer.enabled;
                 yield return new WaitForSeconds(.3f);
             }
-            invincibility = false;
+            ghostMario = false;
         }
     }
 }

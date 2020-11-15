@@ -16,33 +16,29 @@ public class EnemyCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         CollideWithEnemy(other.gameObject);        
     }
-    private void OnCollisionStay2D(Collision2D other) {
-        CollideWithEnemy(other.gameObject);
-    }
+    // private void OnCollisionStay2D(Collision2D other) {
+    //     CollideWithEnemy(other.gameObject);
+    // }
 
-    private void CollideWithEnemy(GameObject enemy) //, int pointsToIncrease)
+    private void CollideWithEnemy(GameObject enemy)
     {
-        bool isNotKillable = enemy.CompareTag("Trap"); 
-
-        if(enemy.CompareTag("Enemy") || isNotKillable)
+        // if Mario can kill the enemy
+        if(!CheckGround.isInGround && enemy.CompareTag("Enemy"))
         {
-            // if Mario can kill the enemy
-            if(!CheckGround.isInGround && !isNotKillable)   
-            {
-                enemy.GetComponent<Animator>().SetBool("Dead", true);
-                gameController.IncreasePoints(100);
-                stateManager.KillEnemyAnim();
-            }
+            enemy.GetComponent<Animator>().SetBool("Dead", true);
+            gameController.IncreasePoints(100);
+            stateManager.KillEnemyAnim(enemy);
+        }
 
-            // if not check if Mario has an extra live to kill him or not
-            else
-            {
-                if(stateManager.marioExtraLives > 0)
-                    stateManager.ShrinkMario();
-                    
-                else
-                    stateManager.DeadMario(false); 
-            }
-        } 
+        // if not check if Mario has an extra live to kill him or not
+        else if(enemy.CompareTag("Enemy") || enemy.CompareTag("Trap"))
+        {
+            stateManager.DeadMario(false);
+            // if(stateManager.marioExtraLives > 0)
+            //     stateManager.ShrinkMario();
+                
+            // else
+            //     stateManager.DeadMario(false); 
+        }
     }
 }

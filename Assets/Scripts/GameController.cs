@@ -27,7 +27,6 @@ public class GameController : MonoBehaviour
     public void IncreasePoints(int pointsToIncrease)
     {   
         points += pointsToIncrease;
-        Debug.Log(points);
         if(points > PlayerPrefs.GetInt("Record"))
         {
             PlayerPrefs.SetInt("Record", points);
@@ -43,13 +42,8 @@ public class GameController : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
         if(currentScene != "Lose a live scene")
         {
-            if(lives > 0)
-            {
-                SceneManager.LoadScene("Lose a live scene"); 
-                savedLevelScene = currentScene;
-            }
-            else
-                SceneManager.LoadScene("Game Over scene");
+            SceneManager.LoadScene( (lives > 0) ? "Lose a live scene" : "Game Over scene");
+            savedLevelScene = currentScene;
         }
         else
         {

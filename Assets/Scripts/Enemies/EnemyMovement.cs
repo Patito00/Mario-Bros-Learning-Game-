@@ -29,10 +29,7 @@ public class EnemyMovement : MonoBehaviour
             // checking limit moving
             if(!noMoveLimits && ( transform.position.x >= moveLimits[0] || transform.position.x <= moveLimits[1]) )
             {
-                speed = -speed;
-                if(spriteRenderer != null)
-                    spriteRenderer.flipX = !spriteRenderer.flipX; 
-                
+                ModifySpeed();
             }  
             transform.Translate(Vector2.right * speed * Time.deltaTime); // moving the player
         }
@@ -43,13 +40,18 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // the goomba changes the direction when collides with a block or an enemy
+    private void ModifySpeed()
+    {
+        speed = -speed;
+        if(spriteRenderer != null)
+            spriteRenderer.flipX = !spriteRenderer.flipX; 
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
 
         if(other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Enemy"))
         {
-            speed = -speed;
-            if(spriteRenderer != null)
-                spriteRenderer.flipX = !spriteRenderer.flipX; 
+            ModifySpeed();
         }
     }
 }

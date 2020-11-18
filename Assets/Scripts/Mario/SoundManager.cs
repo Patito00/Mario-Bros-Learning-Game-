@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
 
     public float LoseALiveSound()
     {
+        Debug.Log("Playing lose a life");
         audioSource.PlayOneShot(loseALifeClip);
         backgroundMusic.Pause();
         return loseALifeClip.length;

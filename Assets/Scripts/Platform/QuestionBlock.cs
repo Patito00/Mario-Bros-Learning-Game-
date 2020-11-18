@@ -6,7 +6,6 @@ public class QuestionBlock : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawnGameObjects;
 
-    // when the player collides with a question blocks, gives a random prize
     private void OnCollisionEnter2D(Collision2D other) {
      
         if(other.gameObject.CompareTag("Player"))

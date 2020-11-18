@@ -42,8 +42,13 @@ public class GameController : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
         if(currentScene != "Lose a live scene")
         {
-            SceneManager.LoadScene( (lives > 0) ? "Lose a live scene" : "Game Over scene");
-            savedLevelScene = currentScene;
+            if(lives > 0)
+            {
+                SceneManager.LoadScene("Lose a live scene"); 
+                savedLevelScene = currentScene;
+            }
+            else
+                SceneManager.LoadScene("Game Over scene");
         }
         else
         {

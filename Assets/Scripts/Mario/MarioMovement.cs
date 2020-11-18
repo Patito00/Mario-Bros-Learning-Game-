@@ -12,7 +12,6 @@ public class MarioMovement : MonoBehaviour
     MarioStateManager marioStateManager;
     CheckGround checkGround;
 
-
     // Start is called before the first frame update
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -30,7 +29,7 @@ public class MarioMovement : MonoBehaviour
         }
 
         // else while Mario is alived, the player can play 
-        else if( !(MarioStateManager.marioIsDead || MarioStateManager.marioWonTheLevel) )
+        else if(!MarioStateManager.marioIsDead && !MarioStateManager.winMario)
         {
             // horizontal moving
             float horizontalMove = Input.GetAxis("Horizontal");

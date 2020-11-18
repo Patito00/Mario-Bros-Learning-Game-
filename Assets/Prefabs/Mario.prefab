@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3850534186805506020}
   - component: {fileID: 3850534186805506022}
   - component: {fileID: 3850534186805506019}
-  - component: {fileID: 3969808915491671011}
   - component: {fileID: 3850534186805506016}
+  - component: {fileID: 2460009339545330132}
   - component: {fileID: 3850534186805506018}
   - component: {fileID: 3850534186805506031}
   - component: {fileID: 7408667221707391038}
@@ -188,18 +188,6 @@ MonoBehaviour:
   killJumpForce: 333
   deadJumpForce: 500
   starPowerTime: 5
---- !u!114 &3969808915491671011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3850534186805506043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0df744587080dc3419f81d7f297f4ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3850534186805506016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +202,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loseALifeClip: {fileID: 8300000, guid: 90ceef20da9a84d9891da3179ede4177, type: 3}
   backgroundMusic: {fileID: 0}
+--- !u!114 &2460009339545330132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850534186805506043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df744587080dc3419f81d7f297f4ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3850534186805506018
 MonoBehaviour:
   m_ObjectHideFlags: 0

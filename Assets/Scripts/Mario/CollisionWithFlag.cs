@@ -13,9 +13,9 @@ public class CollisionWithFlag : MonoBehaviour
     // when Mario collides with the pole
     private void OnCollisionEnter2D(Collision2D other) {
         
-        if(other.gameObject.name == "Pole" && !MarioStateManager.marioWonTheLevel)
+        if(other.gameObject.name == "Pole" && !MarioStateManager.winMario)
         {
-            StartCoroutine(marioStateManager.CollisionWithPole());
+            StartCoroutine(marioStateManager.WinMario());
         }   
         else if(other.gameObject.CompareTag("Goal"))
         {

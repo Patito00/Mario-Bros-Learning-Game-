@@ -6,7 +6,7 @@ public class MarioStateManager : MonoBehaviour
 {   
     GameController gameController;
     public static bool marioIsDead;
-    public static bool marioWonTheLevel;
+    public static bool winMario;
     public float killJumpForce;
     public float deadJumpForce;
     public float starPowerTime;
@@ -29,7 +29,7 @@ public class MarioStateManager : MonoBehaviour
     }
     private void Start() {
         marioIsDead = false;
-        marioWonTheLevel = false;
+        winMario = false;
         marioExtraLives = 0;
     }
 
@@ -47,7 +47,7 @@ public class MarioStateManager : MonoBehaviour
     
     // setting jumping animation
     public void JumpingMario(bool p_isInGround){
-        animator.SetBool("Is In Ground", p_isInGround);
+        animator.SetBool("IsInGround", p_isInGround);
     }
 
     // setting dead animation
@@ -108,23 +108,23 @@ public class MarioStateManager : MonoBehaviour
         starMario = false;
         animator.SetBool("Star", false);
     }
-    // Mario winning state
-    public IEnumerator CollisionWithPole()
+    public IEnumerator WinMario()
     {
         rigidbody2D.bodyType = RigidbodyType2D.Static;
-        marioWonTheLevel = true;
-        animator.SetBool("Win The Level", marioWonTheLevel);
-        yield return new WaitForSeconds(.6f);
-
+        winMario = true;
+        yield return new WaitForSeconds(1f);
         rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
     }
 
     // private methods and private corutines
     private void SetMarioExtraLive(int p_extraLives)
     {
-        marioExtraLives = p_extraLives;
-        animator.SetTrigger("Transform size");
-        StartCoroutine(SetMarioState());
+        if(!starMario)
+        {
+            marioExtraLives = p_extraLives;
+            animator.SetTrigger("Transform size");
+            StartCoroutine(SetMarioState());
+        }
     }
     IEnumerator SetMarioState()
     {

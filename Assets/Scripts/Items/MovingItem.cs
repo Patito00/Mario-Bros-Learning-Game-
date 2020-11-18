@@ -6,9 +6,11 @@ public class MovingItem : MonoBehaviour
 {
     public float speed; 
     public float jumpForce;
+    private bool canJump;
+    
     SpriteRenderer spriteRenderer;
-    Rigidbody2D rigidbody2D;
     CheckGround checkGround;
+    Rigidbody2D rigidbody2D;
 
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -16,18 +18,16 @@ public class MovingItem : MonoBehaviour
         if(GetComponent<CheckGround>() != null)
         {
             checkGround = GetComponent<CheckGround>();
-        }
+        } 
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.right * speed * Time.deltaTime);
-        if(checkGround != null)
+        if(checkGround != null) 
         {
-            Debug.Log(checkGround.isInGround);
-            if(checkGround.isInGround)
-                rigidbody2D.AddForce(Vector3.up * jumpForce);
+            rigidbody2D.AddForce(checkGround.isInGround ? Vector3.up * jumpForce : Vector3.zero);
         }
     }
 

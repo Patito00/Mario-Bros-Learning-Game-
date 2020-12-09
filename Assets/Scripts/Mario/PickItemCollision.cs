@@ -6,10 +6,12 @@ public class PickItemCollision : MonoBehaviour
 {
     GameController gameController;
     MarioStateManager marioStateManager;
+    SoundManager soundManager;
 
     private void Awake() {
         gameController = GameController.Instance;
         marioStateManager = GetComponent<MarioStateManager>();
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
     }
 
     // when Mario Collides with a pick item...
@@ -19,6 +21,7 @@ public class PickItemCollision : MonoBehaviour
         {
             other.GetComponent<Animator>().SetTrigger("Picked Coin");
             gameController.IncreasePoints(100);
+            soundManager.CoinSound();
         }
     }
     // ... or power up items

@@ -145,5 +145,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7718f7bb010c9574687394049365d02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadPosition: -41.5
+  deadPosition: -50
   movingSpeed: 1.5

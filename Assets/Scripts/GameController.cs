@@ -9,20 +9,23 @@ public class GameController : MonoBehaviour
 {
     private static readonly Lazy<GameController> lazy = new Lazy<GameController>(() => new GameController());
     public static GameController Instance { get { return lazy.Value; } }
-    [NonSerialized] public int points;
-    [NonSerialized] public int lives;
+    public int points { get; private set; }
+    public int lives { get; private set; }
     private string currentScene;
     private string savedLevelScene;
 
     private GameController() {
-        Restart();
+        points = 0;
+        lives = 3;
     }
 
     // methods
     public void Restart()
     {
-        points = 0;
-        lives = 3;
+        Instance.points = 0;
+        Instance.lives = 3;
+        FinishLevel.FinishedLevelSetter(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void IncreasePoints(int pointsToIncrease)
     {   
@@ -42,6 +45,7 @@ public class GameController : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
         if(currentScene != "Lose a live scene")
         {
+            lives--;
             if(lives > 0)
             {
                 SceneManager.LoadScene("Lose a live scene"); 

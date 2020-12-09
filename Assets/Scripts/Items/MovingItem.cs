@@ -24,10 +24,21 @@ public class MovingItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
-        if(checkGround != null) 
+        // while the level hasn't finished, the items exist
+        if(MarioStateManager.completedLevel || MarioStateManager.marioIsDead)
         {
-            rigidbody2D.AddForce(checkGround.isInGround ? Vector3.up * jumpForce : Vector3.zero);
+            Destroy(gameObject);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            if(checkGround != null) 
+            {
+                Debug.Log(checkGround.isInGround);
+                if(checkGround.isInGround) rigidbody2D.velocity = Vector2.up * jumpForce;
+                // rigidbody2D.AddForce(checkGround.isInGround ? Vector2.up * jumpForce : Vector2.zero);
+                // rigidbody2D.velocity = new Vector2(0, checkGround.isInGround ? jumpForce : -jumpForce);
+            }
         }
     }
 

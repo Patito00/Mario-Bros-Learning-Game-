@@ -9,7 +9,7 @@ public class KoopaStateManager : MonoBehaviour
     EnemyMovement enemyMovement;
     EnemyMovement initial_enemyMovement;
     private bool isKoopaDead;
-    private bool isKoopaFreeze;
+    private bool movingKoopa;
 
     private void Awake() {
         enemyMovement = GetComponent<EnemyMovement>();
@@ -17,7 +17,7 @@ public class KoopaStateManager : MonoBehaviour
     }
     private void Start() {
         initial_enemyMovement = enemyMovement;
-        isKoopaFreeze = false;
+        movingKoopa = false;
     }
 
     private void Update() {
@@ -39,8 +39,8 @@ public class KoopaStateManager : MonoBehaviour
             {
                 // if collides with the player
                 case "Player":
-                    enemyMovement.enabled = isKoopaFreeze;
-                    isKoopaFreeze = !isKoopaFreeze;
+                    movingKoopa = !movingKoopa;
+                    enemyMovement.enabled = movingKoopa;
                     break;
 
                 // or with an enemy

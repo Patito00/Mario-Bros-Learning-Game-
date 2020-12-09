@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollisionWithFlag : MonoBehaviour
 {
+    public GameObject winMarioAnimation;    
     MarioStateManager marioStateManager;
 
     private void Start() {
@@ -13,13 +14,17 @@ public class CollisionWithFlag : MonoBehaviour
     // when Mario collides with the pole
     private void OnCollisionEnter2D(Collision2D other) {
         
-        if(other.gameObject.name == "Pole" && !MarioStateManager.winMario)
+        if(other.gameObject.name == "Pole" && !MarioStateManager.completedLevel)
         {
-            StartCoroutine(marioStateManager.WinMario());
+            StartCoroutine(marioStateManager.CompletedLevel());
         }   
         else if(other.gameObject.CompareTag("Goal"))
         {
-            Debug.Log("Mario Win");
+            GameObject marioInstantiated = Instantiate(winMarioAnimation, transform.position, Quaternion.identity);
+            marioInstantiated.GetComponent<Animator>()
+                .SetInteger("Mario Extra Lives", marioStateManager.marioExtraLives);
+            marioInstantiated.GetComponent<Animator>().SetBool("Finish WaitingTime", true);
+            Destroy(gameObject);    
         }
     }
 }

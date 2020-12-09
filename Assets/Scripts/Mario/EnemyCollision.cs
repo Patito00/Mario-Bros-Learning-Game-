@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
-    GameController gameController;  
     private MarioStateManager stateManager;
     private CheckGround checkGround;
 
 
     private void Start() {
-        gameController = GameController.Instance;
         stateManager = GetComponent<MarioStateManager>();
         checkGround = GetComponent<CheckGround>();
     }
@@ -21,12 +19,17 @@ public class EnemyCollision : MonoBehaviour
         GameObject enemy = other.gameObject;
 
         // if Mario jumped over the enemy
-        if( !checkGround.isInGround && enemy.CompareTag("Enemy"))
+        // Debug.Log(checkGround.isInGround);
+        if( (!checkGround.isInGround || stateManager.starMario)  && enemy.CompareTag("Enemy"))
         {
             Animator enemyAnimator = enemy.GetComponent<Animator>();
-            gameController.IncreasePoints(!enemyAnimator.GetBool("Dead") ? 100 : 0);
-            enemyAnimator.SetBool("Dead", true);
-            stateManager.KillEnemyAnim(enemy);
+            GameController.Instance.IncreasePoints(!enemyAnimator.GetBool("Dead") ? 100 : 0);
+            
+            if(!stateManager.starMario)
+                enemyAnimator.SetBool("Dead", true);        
+            else
+                Destroy(enemy); 
+            stateManager.KillEnemyAnim();
         }
         // if not check if Mario has an extra live to kill him or not
         else if(enemy.CompareTag("Enemy") || enemy.CompareTag("Trap"))

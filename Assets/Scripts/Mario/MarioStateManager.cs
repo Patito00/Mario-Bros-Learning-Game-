@@ -6,30 +6,32 @@ public class MarioStateManager : MonoBehaviour
 {   
     GameController gameController;
     public static bool marioIsDead;
-    public static bool winMario;
+    public static bool completedLevel;
+    public bool starMario { get; private set; }
     public float killJumpForce;
     public float deadJumpForce;
     public float starPowerTime;
     public int marioExtraLives { get; private set; }  
     private bool ghostMario;
-    private bool starMario;
     Rigidbody2D rigidbody2D;
     BoxCollider2D boxCollider2D;
     SpriteRenderer spriteRenderer;
     Animator animator;
     SoundManager soundManager;
 
-    private void Awake() {
+    private void Awake() 
+    {
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        soundManager = GetComponent<SoundManager>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         gameController = GameController.Instance;
     }
-    private void Start() {
+    private void Start() 
+    {
         marioIsDead = false;
-        winMario = false;
+        completedLevel = false;
         marioExtraLives = 0;
     }
 
@@ -46,12 +48,14 @@ public class MarioStateManager : MonoBehaviour
     }
     
     // setting jumping animation
-    public void JumpingMario(bool p_isInGround){
+    public void JumpingMario(bool p_isInGround)
+    {
         animator.SetBool("IsInGround", p_isInGround);
     }
 
     // setting dead animation
-    public void DeadMario(bool deadByAltitude){
+    public void DeadMario(bool deadByAltitude)
+    {
    
         if(marioExtraLives > 0)
         {
@@ -61,26 +65,23 @@ public class MarioStateManager : MonoBehaviour
         {
             // setting variables
             animator.SetBool("Dead", true);
-            rigidbody2D.AddForce(Vector2.up * deadJumpForce);
+            rigidbody2D.velocity = Vector2.up * deadJumpForce;
+            // rigidbody2D.AddForce(Vector2.up * deadJumpForce, ForceMode2D.Impulse);
             boxCollider2D.enabled = false;  
 
             // playing the dead sound and changing scene
             marioIsDead = true;
-            gameController.lives--;
-            StartCoroutine(gameController.ChangingScene(soundManager.LoseALiveSound()));
+            StartCoroutine(gameController.ChangingScene(soundManager.LoseALive()));
         }
     }   
     // setting killing JumpAnimation
-    public void KillEnemyAnim(GameObject enemy)
+    public void KillEnemyAnim()
     {
-        if(starMario)
+        if(!starMario)
         {
-            Destroy(enemy);
+            rigidbody2D.velocity = Vector2.up * killJumpForce;
         }
-        else
-        {
-            rigidbody2D.AddForce(Vector2.up * killJumpForce);
-        }
+        soundManager.KickEnemySound();
     }
 
     // Mario states methods
@@ -103,15 +104,22 @@ public class MarioStateManager : MonoBehaviour
     {
         starMario = true;
         animator.SetBool("Star", true);
+        soundManager.Starman();
         yield return new WaitForSeconds(starPowerTime);
         
         starMario = false;
+        // soundManager.PlayBackground();
         animator.SetBool("Star", false);
     }
-    public IEnumerator WinMario()
+    public IEnumerator CompletedLevel()
     {
+        // Mario is quiet
         rigidbody2D.bodyType = RigidbodyType2D.Static;
-        winMario = true;
+        completedLevel = true;
+        soundManager.FinishLevel();
+        animator.SetBool("Mario Win Level", completedLevel);
+
+        // Mario moves and then changing Music
         yield return new WaitForSeconds(1f);
         rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
     }
@@ -119,12 +127,10 @@ public class MarioStateManager : MonoBehaviour
     // private methods and private corutines
     private void SetMarioExtraLive(int p_extraLives)
     {
-        if(!starMario)
-        {
-            marioExtraLives = p_extraLives;
-            animator.SetTrigger("Transform size");
-            StartCoroutine(SetMarioState());
-        }
+        marioExtraLives = p_extraLives;
+        animator.SetTrigger("Transform size");
+        soundManager.MushroomSound(marioExtraLives==1);
+        StartCoroutine(SetMarioState());
     }
     IEnumerator SetMarioState()
     {

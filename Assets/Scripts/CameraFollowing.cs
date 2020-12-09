@@ -16,9 +16,13 @@ public class CameraFollowing : MonoBehaviour
     // the camera follows the player when this one is advancing on the level
     void Update()
     {
-        if(target.position.x > targetXMoving){
-            transform.position = new Vector3(target.position.x,0f, 0f) + osffet;
-            targetXMoving = target.position.x;     
-        }   
+        if(target != null)
+        {
+            if(target.position.x > targetXMoving)
+            {
+                transform.position = new Vector3(target.position.x, 0f, 0f) + osffet;
+                targetXMoving = target.position.x;     
+            }
+        }  
     }   
 }

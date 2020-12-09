@@ -41,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
             GetComponent<Animator>().speed = 0f;
         }
     }
-
+    
     // the goomba changes the direction when collides with a block or an enemy
     private void OnCollisionEnter2D(Collision2D other) {
 

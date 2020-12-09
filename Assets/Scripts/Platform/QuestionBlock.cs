@@ -21,10 +21,12 @@ public class QuestionBlock : MonoBehaviour
                 GameObject spawnObj = Instantiate(spawnGameObjects[spawnNumber], spawnPosition, Quaternion.identity);
                 
                 // if the spawn object was a coin wich gives you points
-                if(spawnObj.CompareTag("Coin"))
+                bool coinCollision = spawnObj.CompareTag("Coin"); 
+                if(coinCollision)
                 {
                     GameController.Instance.IncreasePoints(100);
                 }
+                GameObject.Find("Sound Manager").GetComponent<SoundManager>().QuestionBlockSound(!coinCollision);
             }
         }
     }

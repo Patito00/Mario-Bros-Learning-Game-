@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PickItemCollision : MonoBehaviour
 {
+    [SerializeField] private SoundManager soundManager;
     GameController gameController;
     MarioStateManager marioStateManager;
-    SoundManager soundManager;
 
     private void Awake() {
         gameController = GameController.Instance;
         marioStateManager = GetComponent<MarioStateManager>();
-        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
     }
 
     // when Mario Collides with a pick item...

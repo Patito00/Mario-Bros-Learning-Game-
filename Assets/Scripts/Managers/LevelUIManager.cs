@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class LevelUIManager : MonoBehaviour
 {
-    public GameObject PlayingBar;
-    public GameObject WinBar;
-    private Text RecordText;
-    private Text PointsText;
-    private Text LivesText;
+    [SerializeField] private GameObject PlayingBar;
+    [SerializeField] private GameObject WinBar;
+    private static Text RecordText;
+    private static Text PointsText;
+    private static Text LivesText;
 
     private void Start() 
     {
@@ -17,10 +17,11 @@ public class LevelUIManager : MonoBehaviour
         RecordText = WinBar.transform.GetChild(2).GetComponent<Text>();
         PointsText = PlayingBar.transform.GetChild(1).GetComponent<Text>();
         LivesText = PlayingBar.transform.GetChild(2).GetComponent<Text>();
+        ChangeTexts();
     }
 
     // Start is called before the first frame update
-    private void Update()
+    public static void ChangeTexts()
     {
         PointsText.text = "Points: " + GameController.Instance.points;
         LivesText.text = "Lives: " + GameController.Instance.lives;
@@ -28,8 +29,8 @@ public class LevelUIManager : MonoBehaviour
         if(FinishLevel.finishedLevel)
         {
             RecordText.text = "Record: " + PlayerPrefs.GetInt("Record");
-            PlayingBar.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-            WinBar.SetActive(true);
+            PointsText.transform.GetComponentInParent<RectTransform>().anchoredPosition = Vector3.zero;
+            RecordText.transform.GetComponentInParent<Transform>().gameObject.SetActive(true);
         }
     }
 }

@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetInt("Record", points);
         }
+        LevelUIManager.ChangeTexts();
     }
 
     // corotuines

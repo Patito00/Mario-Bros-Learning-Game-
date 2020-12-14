@@ -8,16 +8,16 @@ public class MarioStateManager : MonoBehaviour
     public static bool marioIsDead;
     public static bool completedLevel;
     public bool starMario { get; private set; }
-    public float killJumpForce;
-    public float deadJumpForce;
-    public float starPowerTime;
+    [SerializeField] private SoundManager soundManager;
+    [SerializeField] private float killJumpForce;
+    [SerializeField] private float deadJumpForce;
+    [SerializeField] private float starPowerTime;
     public int marioExtraLives { get; private set; }  
     private bool ghostMario;
     Rigidbody2D rigidbody2D;
     BoxCollider2D boxCollider2D;
     SpriteRenderer spriteRenderer;
     Animator animator;
-    SoundManager soundManager;
 
     private void Awake() 
     {
@@ -25,7 +25,6 @@ public class MarioStateManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
         gameController = GameController.Instance;
     }
     private void Start() 

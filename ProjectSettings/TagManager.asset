@@ -13,6 +13,7 @@ TagManager:
   - Question Blocks
   - Mushrooms
   - Stars
+  - Blocks
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - 
   - 
   - Mario
-  - Block
+  - Platform
   - Pick items
   - Enemy
   - Goal

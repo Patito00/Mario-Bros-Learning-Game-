@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class CheckGround : MonoBehaviour
 {
-    public bool isInGround { get; private set; } 
+    private BoxCollider2D boxCollider2D;
 
-    // if the object is in the ground
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Floor") || other.gameObject.CompareTag("Platform"))
-            isInGround = true;
-    }
-    private void OnCollisionStay2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Floor") || other.gameObject.CompareTag("Platform"))
-            isInGround = true;
+    private void Start() 
+    {
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
-    // if the object isn't
-    private void OnCollisionExit2D(Collision2D other) {
-        isInGround = false;
+    public bool IsGrounded() 
+    {
+        float hitCollisionHeight = .1f;
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size,
+            0f, Vector2.down, hitCollisionHeight, LayerMask.GetMask("Platform"));
+           
+        bool isHitted = hit.collider != null;
+        return isHitted;
     }
+
+    // not working again
 }

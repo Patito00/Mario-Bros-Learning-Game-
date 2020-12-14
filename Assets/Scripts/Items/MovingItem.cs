@@ -34,10 +34,8 @@ public class MovingItem : MonoBehaviour
             transform.Translate(Vector3.right * speed * Time.deltaTime);
             if(checkGround != null) 
             {
-                Debug.Log(checkGround.isInGround);
-                if(checkGround.isInGround) rigidbody2D.velocity = Vector2.up * jumpForce;
-                // rigidbody2D.AddForce(checkGround.isInGround ? Vector2.up * jumpForce : Vector2.zero);
-                // rigidbody2D.velocity = new Vector2(0, checkGround.isInGround ? jumpForce : -jumpForce);
+                if(checkGround.IsGrounded()) 
+                    rigidbody2D.velocity = Vector2.up * jumpForce;
             }
         }
     }

@@ -35,18 +35,15 @@ public class MarioMovement : MonoBehaviour
             float horizontalMove = Input.GetAxis("Horizontal");
             Vector2 move = new Vector2(horizontalMove, 0f);
             transform.Translate(move * runVelocity * Time.deltaTime);  
-
-            // rigidbody.velocity = move * runVelocity * Time.deltaTime;
-            // interesante probar mover a Mario con el Rigidbody
-
             marioStateManager.RunningMario(horizontalMove); // setting running animation
 
             // jumping
-            if (Input.GetKeyDown(KeyCode.Space) && checkGround.isInGround){
+            if (Input.GetKeyDown(KeyCode.Space) && checkGround.IsGrounded())
+            {
                 // rigidbody.AddForce(new Vector2(0, jumpForce));
                 rigidbody.velocity = Vector2.up * jumpForce;
             }
-            marioStateManager.JumpingMario(checkGround.isInGround); // setting jump animation
+            marioStateManager.JumpingMario(checkGround.IsGrounded()); // setting jump animation
         }  
     }
 }

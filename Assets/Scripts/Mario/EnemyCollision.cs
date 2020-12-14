@@ -20,7 +20,7 @@ public class EnemyCollision : MonoBehaviour
 
         // if Mario jumped over the enemy
         // Debug.Log(checkGround.isInGround);
-        if( (!checkGround.isInGround || stateManager.starMario)  && enemy.CompareTag("Enemy"))
+        if( (!checkGround.IsGrounded() || stateManager.starMario)  && enemy.CompareTag("Enemy"))
         {
             Animator enemyAnimator = enemy.GetComponent<Animator>();
             GameController.Instance.IncreasePoints(!enemyAnimator.GetBool("Dead") ? 100 : 0);

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4326177730596506646}
   - component: {fileID: 4326177730596506647}
   m_Layer: 0
-  m_Name: Flag
+  m_Name: Castle Flag
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4326177730613454248}
   m_Layer: 0
-  m_Name: Flag Stop
+  m_Name: Castle Flag Stop
   m_TagString: Untagged
   m_Icon: {fileID: -3839803715187477772, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -871,6 +871,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4326177732099877174}
     m_Modifications:
+    - target: {fileID: 1425874822836726, guid: bd49c6e92a89e4f22bb8e33a71b3baa5, type: 3}
+      propertyPath: m_Name
+      value: Castle Flag
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764210972984946, guid: bd49c6e92a89e4f22bb8e33a71b3baa5, type: 3}
+      propertyPath: m_Name
+      value: Castle Flag Stop
+      objectReference: {fileID: 0}
     - target: {fileID: 4976368594585748, guid: bd49c6e92a89e4f22bb8e33a71b3baa5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 43.98

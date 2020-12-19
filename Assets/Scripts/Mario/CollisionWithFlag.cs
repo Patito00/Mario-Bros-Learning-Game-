@@ -18,7 +18,7 @@ public class CollisionWithFlag : MonoBehaviour
         {
             StartCoroutine(marioStateManager.CompletedLevel());
         }   
-        else if(other.gameObject.CompareTag("Goal"))
+        else if(other.gameObject.CompareTag("Goal") && MarioStateManager.completedLevel)
         {
             GameObject marioInstantiated = Instantiate(winMarioAnimation, transform.position, Quaternion.identity);
             marioInstantiated.GetComponent<Animator>()

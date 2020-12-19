@@ -25,21 +25,22 @@ public class MovingItem : MonoBehaviour
     void Update()
     {
         // while the level hasn't finished, the items exist
-        if(MarioStateManager.completedLevel || MarioStateManager.marioIsDead)
+        if (MarioStateManager.completedLevel || MarioStateManager.marioIsDead)
         {
             Destroy(gameObject);
         }
         else
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
-            if(checkGround != null) 
+            if (checkGround != null)
             {
-                if(checkGround.IsGrounded()) 
+                if (checkGround.IsGrounded())
+                {
                     rigidbody2D.velocity = Vector2.up * jumpForce;
+                }
             }
         }
     }
-
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Platform"))
         {

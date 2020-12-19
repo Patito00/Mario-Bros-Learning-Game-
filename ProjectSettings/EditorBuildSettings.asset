@@ -5,40 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Levels/Level 1.unity
     guid: 164bad5e464a32f40936451b44b31fc5
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 2.unity
+    guid: af30f74ccc91eec42b3e270863c5084f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Final level.unity
+    guid: ade50b623953a2341a346d5dd0dd24c8
   - enabled: 1
     path: Assets/Scenes/Lose a live scene.unity
     guid: 1e5a82c4db545d141ba91616d6fb174a
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/GameOver scene.unity
-    guid: 412b04f49e2f18e4f98fb33193b78c99
   - enabled: 1
     path: Assets/Scenes/Game Over scene.unity
     guid: a3bb2be62871cfd45a4334b9b8698e07
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects: {}

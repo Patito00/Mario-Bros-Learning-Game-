@@ -7,6 +7,8 @@ using System;
 
 public class GameController : MonoBehaviour
 {
+    private static int currentLevel = 1;
+    private static int totalLevels;
     private static readonly Lazy<GameController> lazy = new Lazy<GameController>(() => new GameController());
     public static GameController Instance { get { return lazy.Value; } }
     public int points { get; private set; }
@@ -14,19 +16,29 @@ public class GameController : MonoBehaviour
     private string currentScene;
     private string savedLevelScene;
 
-    private GameController() {
+    private void Awake() { totalLevels = SceneManager.sceneCountInBuildSettings - 2; }
+    private GameController() 
+    {
         points = 0;
         lives = 3;
     }
 
     // methods
     public void Restart()
-    {
+    {   
         Instance.points = 0;
         Instance.lives = 3;
-        FinishLevel.FinishedLevelSetter(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Level 1");
     }
+    public void NextLevel() 
+    {
+        currentLevel++;
+        if(currentLevel < totalLevels) 
+            SceneManager.LoadScene("Level " + currentLevel);
+        else
+            SceneManager.LoadScene("Final level");
+    }
+
     public void IncreasePoints(int pointsToIncrease)
     {   
         points += pointsToIncrease;
@@ -34,7 +46,7 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetInt("Record", points);
         }
-        LevelUIManager.ChangeTexts();
+        GameObject.Find("Game Controller").GetComponent<LevelUIManager>().ChangeTexts();
     }
 
     // corotuines

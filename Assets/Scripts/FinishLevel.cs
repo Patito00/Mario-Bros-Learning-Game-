@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class FinishLevel : MonoBehaviour
 {
-    public static bool finishedLevel;
-    public static void FinishedLevelSetter(bool value){ finishedLevel = value; }
+    // private bool finishedLevel;
     
-    private void Start() 
-    {
-        finishedLevel = false;
-    }
-
     // when Mario arrives in the castle
     public void ConquistCastle()
     {
@@ -24,6 +18,6 @@ public class FinishLevel : MonoBehaviour
     private IEnumerator ShowingFlagTime(float showingTime)
     {
         yield return new WaitForSeconds(showingTime);
-        finishedLevel = true;
+        GameObject.Find("Game Controller").GetComponent<LevelUIManager>().FinishLevelUI();
     }
 }

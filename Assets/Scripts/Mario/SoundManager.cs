@@ -74,10 +74,11 @@ public class SoundManager : MonoBehaviour
     {
         backgroundMusic.clip = pMusic;
         backgroundMusic.Play();
-        StartCoroutine(ActivateBackGroundMusic(clipTime));
+        StopAllCoroutines();
+        StartCoroutine(ActivateBackgroundMusic(clipTime));
         return pMusic.length;
     }
-    private IEnumerator ActivateBackGroundMusic(float clipLength)
+    private IEnumerator ActivateBackgroundMusic(float clipLength)
     {
         yield return new WaitForSeconds(clipLength);
         backgroundMusic.clip = backgroundClip;

@@ -590,7 +590,7 @@ PrefabInstance:
     - target: {fileID: 3299042680740286235, guid: 09bc3cc4ffe874641aed1068592a1f16,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NextLevel
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 3299042680740286235, guid: 09bc3cc4ffe874641aed1068592a1f16,
         type: 3}
@@ -601,6 +601,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Hello World!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299042680740286309, guid: 09bc3cc4ffe874641aed1068592a1f16,
+        type: 3}
+      propertyPath: m_Text
+      value: Play again
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299042680740286311, guid: 09bc3cc4ffe874641aed1068592a1f16,
+        type: 3}
+      propertyPath: m_Name
+      value: Play Again
       objectReference: {fileID: 0}
     - target: {fileID: 3299042680825168793, guid: 09bc3cc4ffe874641aed1068592a1f16,
         type: 3}

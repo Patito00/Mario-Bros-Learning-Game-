@@ -13,24 +13,23 @@ public class LevelUIManager : MonoBehaviour
 
     private void Start() 
     {
-        WinBar.SetActive(false);
         RecordText = WinBar.transform.GetChild(2).GetComponent<Text>();
         PointsText = PlayingBar.transform.GetChild(1).GetComponent<Text>();
         LivesText = PlayingBar.transform.GetChild(2).GetComponent<Text>();
         ChangeTexts();
     }
 
-    // Start is called before the first frame update
-    public static void ChangeTexts()
+    public void ChangeTexts()
     {
-        PointsText.text = "Points: " + GameController.Instance.points;
-        LivesText.text = "Lives: " + GameController.Instance.lives;
-        
-        if(FinishLevel.finishedLevel)
-        {
-            RecordText.text = "Record: " + PlayerPrefs.GetInt("Record");
-            PointsText.transform.GetComponentInParent<RectTransform>().anchoredPosition = Vector3.zero;
-            RecordText.transform.GetComponentInParent<Transform>().gameObject.SetActive(true);
-        }
+        GameController gameController = GameController.Instance;
+        PointsText.text = "Points: " + gameController.points;
+        LivesText.text = "Lives: " + gameController.lives;
+    }
+
+    public void FinishLevelUI() 
+    {
+        RecordText.text = "Record: " + PlayerPrefs.GetInt("Record");
+        WinBar.SetActive(true);
+        PlayingBar.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
     }
 }

@@ -18,11 +18,12 @@ public class CameraFollowing : MonoBehaviour
     {
         if(target != null)
         {
-            if(target.position.x > targetXMoving)
+            transform.position = new Vector3(target.position.x, 0f, 0f) + osffet;
+            /*if(target.position.x > targetXMoving)
             {
                 transform.position = new Vector3(target.position.x, 0f, 0f) + osffet;
                 targetXMoving = target.position.x;     
-            }
-        }  
+            }*/
+        }
     }   
 }

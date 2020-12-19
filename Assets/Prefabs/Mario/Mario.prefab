@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runVelocity: 6
-  jumpForce: 6
+  jumpForce: 7.5
   deadPoint: -5
 --- !u!114 &3850534186805506019
 MonoBehaviour:
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b571914c7ec148947217913f3a745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 0}
   killJumpForce: 6
   deadJumpForce: 15
   starPowerTime: 5
@@ -222,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3dbadadabf9c343b4db426659afcaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 0}
 --- !u!114 &7408667221707391038
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -114,7 +114,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8343073, y: 1.05901}
+  m_Size: {x: 0.85, y: 1.05901}
   m_EdgeRadius: 0
 --- !u!50 &3850534186805506023
 Rigidbody2D:
@@ -185,8 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundManager: {fileID: 0}
   killJumpForce: 6
-  deadJumpForce: 15
-  starPowerTime: 5
+  deadJumpForce: 12
+  starPowerTime: 6
 --- !u!114 &2460009339545330132
 MonoBehaviour:
   m_ObjectHideFlags: 0

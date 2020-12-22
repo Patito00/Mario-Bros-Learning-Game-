@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     {   
         Instance.points = 0;
         Instance.lives = 3;
+        currentLevel = 1;
         SceneManager.LoadScene("Level 1");
     }
     public void NextLevel() 

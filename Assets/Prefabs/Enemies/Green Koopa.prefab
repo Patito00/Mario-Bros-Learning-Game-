@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1691864703829254ebf163e104b60d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noMoveLimits: 0
+  noMoveLimits: 1
   movingRange: 3
   speed: 1.25
   spriteRenderer: {fileID: 1167450214021411152}
@@ -197,3 +197,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46337f95d545a24580d68abb15e08c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadKoopaSpeed: 3

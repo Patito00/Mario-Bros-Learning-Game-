@@ -22,6 +22,10 @@ public class PickItemCollision : MonoBehaviour
             gameController.IncreasePoints(100);
             soundManager.CoinSound();
         }
+        else if (other.CompareTag("Keys")) 
+        {
+            other.GetComponent<KeyManager>().Unlocking();
+        }
     }
     // ... or power up items
     private void OnCollisionEnter2D(Collision2D other) {

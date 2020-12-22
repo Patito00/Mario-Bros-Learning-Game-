@@ -21,6 +21,5 @@ public class CheckGround : MonoBehaviour
         bool isHitted = hit.collider != null;
         return isHitted;
     }
-
-    // not working again
+    // not working again //
 }

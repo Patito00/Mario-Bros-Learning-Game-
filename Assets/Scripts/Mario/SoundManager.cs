@@ -5,18 +5,19 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     // Variables
-    public AudioSource backgroundMusic;
-    public AudioClip loseALiveClip;
-    public AudioClip starManClip;
-    public AudioClip finishLevelClip;
-    public AudioClip coinClip;
-    public AudioClip kickEnemyClip;
-    public AudioClip MushroomUpClip;
-    public AudioClip MushroomDownClip;
-    public AudioClip PowerUpAppears;
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioClip loseALiveClip;
+    [SerializeField] private AudioClip starManClip;
+    [SerializeField] private AudioClip finishLevelClip;
+    [SerializeField] private AudioClip coinClip;
+    [SerializeField] private AudioClip kickEnemyClip;
+    [SerializeField] private AudioClip MushroomUpClip;
+    [SerializeField] private AudioClip MushroomDownClip;
+    [SerializeField] private AudioClip PowerUpAppears;
+    [SerializeField] private AudioClip keySound;
     AudioSource audioSource;
     private AudioClip backgroundClip;
-    
+
     // On Start
     private void Start() 
     {
@@ -67,6 +68,10 @@ public class SoundManager : MonoBehaviour
         {
             CoinSound();
         }
+    }
+    public void UnlockedKeySound() 
+    {
+        audioSource.PlayOneShot(keySound);
     }
 
     // private mehtods and coroutines

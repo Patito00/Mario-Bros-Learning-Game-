@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noMoveLimits: 0
   movingRange: 2
-  speed: 1
+  speed: 60
   spriteRenderer: {fileID: 0}
 --- !u!114 &869022332
 MonoBehaviour:

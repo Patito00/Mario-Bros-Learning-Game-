@@ -7,10 +7,11 @@ public class KeyManager : MonoBehaviour
     [SerializeField] private GameObject LockedObjects;
     [SerializeField] private GameObject ToUnlockObjects;
 
-    public void Unlocking() 
+    public void Unlocking()
     {
-        Debug.Log("Unlocking blocks");
-        Destroy(LockedObjects);
         ToUnlockObjects.SetActive(true);
+        GameObject.Find("Sound Manager").GetComponent<SoundManager>().UnlockedKeySound();
+        Destroy(LockedObjects);
+        Destroy(gameObject);
     }
 }

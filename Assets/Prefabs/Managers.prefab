@@ -366,6 +366,7 @@ MonoBehaviour:
   MushroomUpClip: {fileID: 8300000, guid: 26301d2e86e99420599e315297a825df, type: 3}
   MushroomDownClip: {fileID: 8300000, guid: b520e6b32619c490a934225b9b162dc2, type: 3}
   PowerUpAppears: {fileID: 8300000, guid: 97a450c65284a4a3094ba5c2221a492b, type: 3}
+  keySound: {fileID: 8300000, guid: 08aa4ece0b520154097da6c9c101d48d, type: 3}
 --- !u!1 &7440246175174664205
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,37 +13,46 @@ public class MarioMovement : MonoBehaviour
     CheckGround checkGround;
 
     // Start is called before the first frame update
-    private void Awake() {
+    private void Awake()
+    {
         rigidbody = GetComponent<Rigidbody2D>();
         marioStateManager = GetComponent<MarioStateManager>();
         checkGround = GetComponent<CheckGround>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // if Mario dies, getting down away
-        if(transform.position.y < deadPoint)
+        if (transform.position.y < deadPoint)
         {
             marioStateManager.DeadMario(true);
         }
 
         // else while Mario is alived, the player can play 
-        else if(!MarioStateManager.marioIsDead && !MarioStateManager.completedLevel)
+        else if (!MarioStateManager.marioIsDead && !MarioStateManager.completedLevel)
         {
             // horizontal moving
             float horizontalMove = Input.GetAxis("Horizontal");
-            Vector2 move = new Vector2(horizontalMove, 0f);
-            transform.Translate(move * runVelocity * Time.deltaTime);  
+
+            //rigidbody.MovePosition(transform.position + (Vector3.right * horizontalMove * runVelocity));
+            //new Vector3(horizontalMove * runVelocity, rigidbody.velocity.y, 0f));
+
+            rigidbody.velocity = new Vector2(horizontalMove * runVelocity, rigidbody.velocity.y);
             marioStateManager.RunningMario(horizontalMove); // setting running animation
 
+            // a veces Mario se adhiere a las paredes, al igual que los enemigos al piso... 
+            // sigue el bug...
+
             // jumping
-            if (Input.GetKeyDown(KeyCode.Space) && checkGround.IsGrounded())
+            if (checkGround.IsGrounded())
             {
-                // rigidbody.AddForce(new Vector2(0, jumpForce));
-                rigidbody.velocity = Vector2.up * jumpForce;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    rigidbody.velocity = Vector2.up * jumpForce;
+                }
             }
             marioStateManager.JumpingMario(checkGround.IsGrounded()); // setting jump animation
-        }  
+        }
     }
 }

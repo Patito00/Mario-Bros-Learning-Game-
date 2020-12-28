@@ -23,13 +23,14 @@ public class EnemyCollision : MonoBehaviour
         if( (!checkGround.IsGrounded() || stateManager.starMario)  && enemy.CompareTag("Enemy"))
         {
             Animator enemyAnimator = enemy.GetComponent<Animator>();
-            GameController.Instance.IncreasePoints(!enemyAnimator.GetBool("Dead") ? 100 : 0);
-            
+            GameController.Instance.IncreasePoints(100);
+
             if(!stateManager.starMario)
                 enemyAnimator.SetBool("Dead", true);        
             else
                 Destroy(enemy); 
-            stateManager.KillEnemyAnim();
+
+            stateManager.KillEnemy();
         }
         // if not check if Mario has an extra live to kill him or not
         else if(enemy.CompareTag("Enemy") || enemy.CompareTag("Trap"))

@@ -34,10 +34,10 @@ public class EnemyMovement : MonoBehaviour
                     spriteRenderer.flipX = !spriteRenderer.flipX;
 
             }
-            /*transform.Translate(Vector2.right * speed * Time.deltaTime); // moving the player*/
+            transform.Translate(Vector2.right * speed * Time.deltaTime); // moving the player
 
-            Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
-            rigidbody2D.velocity = new Vector2(speed * Time.fixedDeltaTime, rigidbody2D.velocity.y);
+/*            Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
+            rigidbody2D.velocity = new Vector2(speed * Time.fixedDeltaTime, rigidbody2D.velocity.y);*/
             // nuevo bug: los enemigos se pegan al piso y no se mueven //
         }
         else

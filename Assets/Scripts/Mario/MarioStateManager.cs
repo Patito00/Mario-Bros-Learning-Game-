@@ -60,7 +60,7 @@ public class MarioStateManager : MonoBehaviour
         {
             ShrinkMario();
         }
-        else if(!marioIsDead && ( !(ghostMario || starMario) || deadByAltitude ))
+        else if(!marioIsDead && ( !(ghostMario || starMario) || deadByAltitude ) )
         {
             // setting variables
             animator.SetBool("Dead", true);
@@ -72,9 +72,9 @@ public class MarioStateManager : MonoBehaviour
             marioIsDead = true;
             StartCoroutine(gameController.ChangingScene(soundManager.LoseALive()));
         }
-    }   
+    }
     // setting killing JumpAnimation
-    public void KillEnemyAnim()
+    public void KillEnemy()
     {
         if(!starMario)
         {
@@ -138,6 +138,8 @@ public class MarioStateManager : MonoBehaviour
 
         // setting the correspond size layer
         ghostMario = marioExtraLives == 0;
+        /*Debug.Log("=========FROM SETMARIOSTATE=========");
+        Debug.Log("Ghost Mario: " + ghostMario + ", MarioLives: " + marioExtraLives);*/
         animator.SetLayerWeight(marioExtraLives, 1); 
         animator.SetLayerWeight( ghostMario ? 1 : 0, 0);
 

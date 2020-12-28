@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     private static int totalLevels;
     private static readonly Lazy<GameController> lazy = new Lazy<GameController>(() => new GameController());
     public static GameController Instance { get { return lazy.Value; } }
-    public int points { get; private set; }
+    public int points { get; private set; } private int currentPoints;
     public int lives { get; private set; }
     private string currentScene;
     private string savedLevelScene;
@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     private GameController() 
     {
         points = 0;
+        currentPoints = 0;
         lives = 3;
     }
 
@@ -34,7 +35,8 @@ public class GameController : MonoBehaviour
     public void NextLevel() 
     {
         currentLevel++;
-        if(currentLevel < totalLevels) 
+        Instance.currentPoints = Instance.points;
+        if (currentLevel < totalLevels) 
             SceneManager.LoadScene("Level " + currentLevel);
         else
             SceneManager.LoadScene("Final level");
@@ -60,7 +62,8 @@ public class GameController : MonoBehaviour
         if(currentScene != "Lose a live scene")
         {
             lives--;
-            if(lives > 0)
+            points = Instance.currentPoints;
+            if (lives > 0)
             {
                 SceneManager.LoadScene("Lose a live scene"); 
                 savedLevelScene = currentScene;

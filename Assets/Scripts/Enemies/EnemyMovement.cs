@@ -49,13 +49,15 @@ public class EnemyMovement : MonoBehaviour
     // the goomba changes the direction when collides with a block or an enemy
     private void OnCollisionEnter2D(Collision2D other)
     {
-
-        if (!other.gameObject.CompareTag("Floor"))
-        //other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Enemy") || )
+        if(other.gameObject.CompareTag("Blocks") || 
+            other.gameObject.CompareTag("Enemy") ||
+            other.gameObject.CompareTag("Trap"))
         {
             speed = -speed;
             if (spriteRenderer != null)
-                spriteRenderer.flipX = !spriteRenderer.flipX;
+                spriteRenderer.flipX = !spriteRenderer.flipX;  
         }
+
+        // en otro momento podria comparar mas facilmente el layer del enemigo, simplifico asi //
     }
 }

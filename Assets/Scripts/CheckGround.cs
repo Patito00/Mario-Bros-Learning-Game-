@@ -16,7 +16,7 @@ public class CheckGround : MonoBehaviour
     {
         float hitCollisionHeight = .1f;
         RaycastHit2D hit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size,
-            0f, Vector2.down, hitCollisionHeight, LayerMask.GetMask("Platform"));
+            0f, Vector2.down, hitCollisionHeight, LayerMask.GetMask("Floor"));
 
         Color rayColor;
         if (hit.collider != null)

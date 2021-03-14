@@ -34,16 +34,8 @@ public class MarioMovement : MonoBehaviour
         {
             // horizontal moving
             float horizontalMove = Input.GetAxis("Horizontal");
-
-            //rigidbody.MovePosition(transform.position + (Vector3.right * horizontalMove * runVelocity));
-            //new Vector3(horizontalMove * runVelocity, rigidbody.velocity.y, 0f));
-
             transform.Translate(Vector3.right * horizontalMove * runVelocity * Time.deltaTime);
-            //rigidbody.velocity = new Vector2(horizontalMove * runVelocity, rigidbody.velocity.y);
             marioStateManager.RunningMario(horizontalMove); // setting running animation
-
-            // a veces Mario se adhiere a las paredes, al igual que los enemigos al piso... 
-            // sigue el bug...
 
             // jumping
             if (checkGround.IsGrounded())
